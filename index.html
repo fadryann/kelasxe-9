@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>Kelas XE-9 SMAGRISAPA</title>
+<style>
+  /* Reset and base */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #000000, #2575fc);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 600px;
+    max-width: 350px;
+    margin-left: auto;
+    margin-right: auto;
+    overflow: hidden;
+  }
+  header {
+    padding: 1rem 0.5rem;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 0 0 8px rgba(0,0,0,0.25);
+    user-select: none;
+  }
+  main {
+    flex: 1 0 auto;
+    width: 100%;
+    padding: 0 0.4rem 1rem 0.4rem;
+    overflow-y: auto;
+  }
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(90px,1fr));
+    gap: 0.5rem;
+    justify-items: center;
+  }
+  .gallery img {
+    width: 90px;
+    height: 90px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .gallery img:hover,
+  .gallery img:focus {
+    transform: scale(1.1);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    outline: none;
+  }
+  /* Modal styles */
+  .modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal img {
+    max-width: 90vw;
+    max-height: 90vh;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+  }
+  /* Scrollbar for main on mobile */
+  main::-webkit-scrollbar {
+    width: 6px;
+  }
+  main::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.3);
+    border-radius: 3px;
+  }
+  main::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  @media (max-height: 600px) and (max-width: 350px) {
+    main {
+      max-height: 500px;
+    }
+  }
+</style>
+</head>
+<body>
+<header>Kelas XE-9</header>
+<main>
+  <section class="gallery" aria-label="Galeri Foto Kelas XE-9">
+    <img src="foto 1.jpeg" alt="Foto kelas XE-9 nomor 1" tabindex="0" onclick="openModal(this.src)" />
+    <img src="foto 2.jpeg" alt="Foto kelas XE-9 nomor 2" tabindex="0" onclick="openModal(this.src)" />
+    <img src="foto 3.jpeg" alt="Foto kelas XE-9 nomor 3" tabindex="0" onclick="openModal(this.src)" />
+    <img src="foto 4.jpeg" alt="Foto kelas XE-9 nomor 4" tabindex="0" onclick="openModal(this.src)" />
+    <img src="foto 5.jpeg" alt="Foto kelas XE-9 nomor 5" tabindex="0" onclick="openModal(this.src)" />
+    <img src="foto 6.jpeg" alt="Foto kelas XE-9 nomor 6" tabindex="0" onclick="openModal(this.src)" />
+  </section>
+</main>
+
+<!-- Modal element -->
+<div class="modal" id="imgModal" onclick="closeModal(event)">
+  <img id="modalImage" src="" alt="Gambar diperbesar" />
+</div>
+
+<script>
+  // Open the modal and set the large image source
+  function openModal(src) {
+    const modal = document.getElementById('imgModal');
+    const modalImg = document.getElementById('modalImage');
+    modalImg.src = src;
+    modal.style.display = 'flex';
+  }
+
+  // Close modal when clicking outside the image or pressing ESC
+  function closeModal(event) {
+    const modal = document.getElementById('imgModal');
+    if (event.target === modal) {
+      modal.style.display = 'none';
+      // optional: clear image src to free memory
+      document.getElementById('modalImage').src = '';
+    }
+  }
+
+  // Close modal on ESC key press
+  document.addEventListener('keydown', function(event) {
+    if(event.key === 'Escape') {
+      const modal = document.getElementById('imgModal');
+      if (modal.style.display === 'flex') {
+        modal.style.display = 'none';
+        document.getElementById('modalImage').src = '';
+      }
+    }
+  });
+</script>
+</body>
+</html>
